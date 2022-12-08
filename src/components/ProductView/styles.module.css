@@ -1,0 +1,12 @@
+.imageGallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+}
+
+.imageGallery::after {
+  content: "";
+  flex-basis: 350px;
+}

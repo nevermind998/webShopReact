@@ -1,0 +1,7 @@
+  .productCategories{
+    display: flex;
+    gap: 5px;
+  }
+  .productCategoriesLabel{
+    margin-bottom: 10px;
+  }

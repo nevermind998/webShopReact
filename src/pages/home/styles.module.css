@@ -1,0 +1,7 @@
+.main{
+    display: flex;
+}
+
+.column {
+    flex-grow: 2; 
+  }

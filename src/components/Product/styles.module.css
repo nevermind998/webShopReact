@@ -1,0 +1,28 @@
+.product_overview {
+    flex-basis: 212px; 
+    position: relative;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .product_image {
+    object-fit: contain;
+    max-width: 100%;
+    height: 150px;
+    width: 150px;
+    vertical-align: middle;
+    justify-content: center;
+    margin: 5px 0px 0px 30px;
+  }
+  
+  .product_title {
+    font-size: 13px;
+    text-align: center;
+  }
+  .product_price {
+    font-size: 13px;
+    text-align: center;
+  }
+  
+ 
