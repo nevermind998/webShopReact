@@ -34,10 +34,8 @@ export const FilterProductsProvider = ({ children }: props) => {
     let price = event.target.value;
     getAll();
     console.log(price);
-    console.log("Ovde sam!!");
    if(products.length === 0) return;
     const filterByPrice = products.filter((product) => product.price >= price);
-    productsState.products = filterByPrice;
     dispatch({ type: "GET_PRODUCTS_BY_PRICE", payload: filterByPrice });
     setProducts(filterByPrice)
     console.log(products);
