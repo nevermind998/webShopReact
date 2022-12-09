@@ -42,11 +42,12 @@ export const ProductsProvider = ({ children }: props) => {
       dispatch({ type: "SET_PRODUCTS_DATA_ERROR" });
     }
   };
-
+  
+/*
   useEffect(() => {
     getAll();
   }, []);
-
+*/
   return (
     <ProductContext.Provider
       value={{

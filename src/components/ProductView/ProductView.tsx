@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styles from "./styles.module.css";
 import Product from "components/Product/Product";
 import { ProductContext } from "context/product/ProductContext";
@@ -8,6 +8,9 @@ const ProductView = () => {
   const {productsState, getAll} = useContext(ProductContext)    
   const { products } = productsState;
   
+  useEffect(() => {
+    getAll();
+  }, []);
   
   return (
      
