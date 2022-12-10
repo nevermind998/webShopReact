@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { productReducer } from "./ProductReducer";
 import { IProduct } from "interfaces";
 import productServices from "services/product.services";
@@ -6,16 +6,19 @@ import { ProductContext } from "./ProductContext";
 
 export interface ProductState {
   products: IProduct[];
+  product: any;
 }
 
 export type ProductContextProps = {
   productsState: ProductState;
   setProducts: (products : IProduct[]) => void;
   getAll: () => void;
+  getProductById: (id : any) => void;
 };
 
 const INITIAL_STATE = {
-  products: []
+  products: [],
+  product: null
 };
 
 
@@ -42,18 +45,28 @@ export const ProductsProvider = ({ children }: props) => {
       dispatch({ type: "SET_PRODUCTS_DATA_ERROR" });
     }
   };
-  
-/*
-  useEffect(() => {
-    getAll();
-  }, []);
-*/
+
+  const getProductById = (id : any) => {
+    dispatch({type: "GET_PRODUCT_BY_ID"});
+    try {
+      console.log("Javljam se iz odavde")
+        productServices.getById(id)
+         .then(function(response){ 
+            dispatch({ type: "SET_PRODUCT",payload: response.data});
+          })
+    } catch (error) {
+      dispatch({ type: "SET_PRODUCT_DATA_ERROR" });
+    }
+  }
+
+
   return (
     <ProductContext.Provider
       value={{
         productsState: state,
         getAll,
-        setProducts
+        setProducts,
+        getProductById
       }}
     >
       {children}

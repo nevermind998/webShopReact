@@ -5,6 +5,9 @@ type ProductAction =
   | { type: "GET_ALL_PRODUCTS_DATA"; }
   | { type: "SET_PRODUCTS_DATA"; payload: IProduct[] }
   | { type: "SET_PRODUCTS_DATA_ERROR"; }
+  | { type: "GET_PRODUCT_BY_ID"; }
+  | { type: "SET_PRODUCT"; payload: IProduct}
+  | { type: "SET_PRODUCT_DATA_ERROR"; }
 
 
 export const productReducer = (
@@ -29,7 +32,21 @@ export const productReducer = (
         ...state
       };
 
+    case "GET_PRODUCT_BY_ID":
+      return {
+        ...state
+      };
 
+    case "SET_PRODUCT":
+      return {
+        ...state,
+        product: action.payload
+      };
+
+    case "SET_PRODUCT_DATA_ERROR":
+      return {
+        ...state
+      };
 
     default:
       return state;

@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import styles from "./styles.module.css";
-import Product from "components/Product/Product";
 import { ProductContext } from "context/product/ProductContext";
+import ProductCard from "components/ProductCard/ProductCard";
 
-const ProductView = () => {
+const ProductOverview = () => {
 
   const {productsState, getAll} = useContext(ProductContext)    
   const { products } = productsState;
@@ -11,19 +11,19 @@ const ProductView = () => {
   useEffect(() => {
     getAll();
   }, []);
-  
+
   return (
      
         <ul className={styles.imageGallery}>
           {products.map(product =>{
               return (
-                <Product
+                <ProductCard
                 id={product.id} 
                 title={product.title} 
                 price={product.price}
                 description={product.description} 
                 category={product.category} 
-                image={product.image} 
+                image={product.image}
                 rating={{
                       rate: product.rating.rate,
                       count: product.rating.count
@@ -34,4 +34,4 @@ const ProductView = () => {
   );
 };
 
-export default ProductView;
+export default ProductOverview;

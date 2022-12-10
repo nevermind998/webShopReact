@@ -1,0 +1,36 @@
+.product_overview {
+  display: flex;
+  font-size: 18px;
+}
+
+.product_image {
+  object-fit: contain;
+  height: auto;
+  width: 30%;
+  margin: 5px 0px 0px 30px;
+}
+
+.details {
+  margin-left: 62px;
+}
+
+.product_title {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.product_price {
+  color:#595958;
+  font-weight: bold;
+}
+
+.category {
+  color: #919190;
+}
+.description{
+  color: #919190;
+}
+.rating {}
+
+
+

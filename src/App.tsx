@@ -5,6 +5,7 @@ import { CounterProvider } from "./context/counter/CounterProvider";
 import { HomePage, ExamplePage, NotFoundPage, CartPage } from "pages";
 import { ProductsProvider } from "context/product/ProductProvider";
 import { FilterProductsProvider } from "context/filter/FilterProvider";
+import ProductPage from "pages/product/ProductPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/example" element={<ExamplePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/ProductPage/:id" element={<ProductPage />} />
         </Routes>
           </FilterProductsProvider>
         </ProductsProvider>

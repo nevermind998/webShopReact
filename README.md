@@ -49,7 +49,7 @@
 1) Home page : there will be displayed list of products
    * Product cards: each card should have image, price title, and category, add wishlist
      all cards will be clicable and after click on particular card we will be redirected
-     on single product
+     on single product +
    - create filters: by category, price rang
    - sorter: by price, by title asc & desc
    - autocomplete searh product by title
