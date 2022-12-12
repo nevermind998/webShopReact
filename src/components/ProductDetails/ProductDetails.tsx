@@ -1,18 +1,35 @@
+import { useState, useEffect} from 'react'
 import { IconButton } from "@material-ui/core";
 import { Button } from "@mui/material";
-import { ProductContext } from "context/product/ProductContext";
-import { useEffect, useContext } from "react";
 import styles from "./styles.module.css";
+import productServices from "services/product.services";
+import { IProduct } from 'interfaces';
 
 const ProductDetails = (data: any) => {
-  const { getProductById, productsState } = useContext(ProductContext)  
-  const product = productsState.product;
+  
+ const [product, setProduct] = useState<IProduct | null>(null) 
+ const [isLoading, setIsLoading] = useState(false)
+  
 
   useEffect(() => {
     getProductById(data.id);
-    console.log("Id je"); 
-  }, []);
+  }, []); // eslint-disable-line
 
+  const getProductById = (id : any) => {
+   
+    try {
+      console.log("Javljam se iz odavde")
+      setIsLoading(true)
+        productServices.getById(id)
+         .then(function(response){ 
+            setProduct(response.data)
+            setIsLoading(false)
+          })
+    } catch (error) {
+      setIsLoading(false)
+    }
+  }
+  if(isLoading) return <div>loading...</div>
   return (
     <div>
       { product ? 

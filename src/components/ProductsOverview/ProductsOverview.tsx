@@ -18,16 +18,9 @@ const ProductOverview = () => {
           {products.map(product =>{
               return (
                 <ProductCard
-                id={product.id} 
-                title={product.title} 
-                price={product.price}
-                description={product.description} 
-                category={product.category} 
-                image={product.image}
-                rating={{
-                      rate: product.rating.rate,
-                      count: product.rating.count
-                  }} />
+                   key={product.id}
+                   {...product}
+                />
               );
             })}
         </ul>
