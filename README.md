@@ -46,22 +46,22 @@
 - use state managment react context or redux 
 - use some of the libraries for workin with forms ( React-hook-Form or Formic)
 # Create Pages:
-1) Home page : there will be displayed list of products
+1) Home page : there will be displayed list of products +
    * Product cards: each card should have image, price title, and category, add wishlist
      all cards will be clicable and after click on particular card we will be redirected
      on single product +
-   - create filters: by category, price rang
-   - sorter: by price, by title asc & desc
-   - autocomplete searh product by title
+   - create filters: by category, price rang +
+   - sorter: by price, by title asc & desc +
+   - autocomplete searh product by title +
 
 2) Single Product page: Detail of product
    This page should contain the folowing components :
-    - title
+    - title 
     - description
     - Image
     - price
-    - button add to wishlist
-    - button add to cart ( with posibility to add quantity)
+    - button add to wishlist ---
+    - button add to cart ( with posibility to add quantity) ---
     - Category 
     - rating,
    * each section should be component which will be included
