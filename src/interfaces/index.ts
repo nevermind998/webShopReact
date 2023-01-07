@@ -9,6 +9,7 @@ export interface IProduct {
       rate: number;
       count: number;
    }
+   visible: boolean;
 }
 
 export interface ICartItem {

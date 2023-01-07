@@ -4,6 +4,7 @@ import { IProduct } from "interfaces";
 import { FilterContext } from "./FilterContext";
 import productServices from "services/product.services";
 import { ProductContext } from "context/product/ProductContext";
+import { IActiveFilter } from "components/FilterSideBar/FilterSideBar";
 
 export interface FilterState {
   categories: string[];
@@ -11,10 +12,12 @@ export interface FilterState {
 
 export type FilterContextProps = {
   filterState: FilterState;
-  categories : string[];
-  getProductCategories:() => void;
-  filterPorductsByPrice: (event: any) => void;
-  filterProductsByCategory: (products: IProduct[], category: string) => void;
+  categories: string[];
+  getProductCategories: () => void;
+  filterProducts: (activeFilters: IActiveFilter[]) => void;
+  sortingProduct: (event: any) => void;
+  searchProduct: (searchBy: string) => void;
+  clearSearch: () => void;
 };
 
 const INITIAL_STATE = {
@@ -27,44 +30,78 @@ interface props {
 
 export const FilterProductsProvider = ({ children }: props) => {
   const [state, dispatch] = useReducer(filterReducer, INITIAL_STATE);
-  const { productsState, setProducts, getAll} = useContext(ProductContext);
+  const { productsState, setProducts } = useContext(ProductContext);
   var products = productsState.products;
 
-  const filterPorductsByPrice = (event: any) =>{
-    let price = event.target.value;
-    getAll();
-    console.log(price);
-   if(products.length === 0) return;
-    const filterByPrice = products.filter((product) => product.price >= price);
-    dispatch({ type: "GET_PRODUCTS_BY_PRICE", payload: filterByPrice });
-    setProducts(filterByPrice)
-    console.log(products);
-    
+  const filterProducts = (activeFilters: IActiveFilter[]) => {
+    let filter = activeFilters.find(filter => filter.filterBy === "priceRange");
+    let price = filter?.active ? filter?.value : null;
+    let exists = false;
+
+    let activeCategoryFilters = activeFilters.filter(filter => filter.filterBy !== "priceRange")
+
+    if (activeCategoryFilters.length != 0) {
+      products.forEach((product: IProduct) => {
+        if (activeCategoryFilters.length != 0) exists = activeCategoryFilters.some(category => (product.category === category.filterBy));
+        else exists = false;
+        if ((price == null || product.price >= price) && exists) product.visible = true;
+        else product.visible = false;
+      });
+    }
+    else {
+      products.forEach((product: IProduct) => {
+        if ((price != null && product.price >= price)) product.visible = true;
+        else product.visible = false;
+      });
+    }
+
+    dispatch({ type: "GET_PRODUCTS_BY_FILTER" });
+    setProducts(products);
   }
 
-  const filterProductsByCategory = (products: IProduct[], category: string) =>{
-    if(products.length === 0) return;
-    const filterByCategory = products.filter((product) => product.category === category);
-    products = filterByCategory;
-    dispatch({ type: "GET_PRODUCTS_BY_CATEGORY", payload: filterByCategory });
+  const sortingProduct = (event: any) => {
+    let option = event.target.value;
+    let products = productsState.products;
+    let visibleProducts = products.filter(product => product.visible);
+    if (option === 'ascPrice') visibleProducts.sort((a, b) =>
+      a.price < b.price ? -1 : 1
+    );
+    if (option === 'dscPrice') visibleProducts.sort((a, b) =>
+      a.price > b.price ? -1 : 1
+    );
+    if (option === 'ascTitle') visibleProducts.sort((a, b) =>
+      a.title < b.title ? -1 : 1
+    );
+    if (option === 'dscTitle') visibleProducts.sort((a, b) =>
+      a.title > b.title ? -1 : 1
+    );
+
+    setProducts(visibleProducts);
+  }
+
+  const searchProduct = (searchBy: string) => {
+    let products = productsState.allProducts;
+    let searchedProducts = products.filter(product => product.title.toLowerCase().startsWith(searchBy.toLowerCase()));
+    searchedProducts.map(product => product.visible = true);
+    setProducts(searchedProducts);
+  }
+
+  const clearSearch = () => {
+    setProducts(productsState.allProducts);
   }
 
   const getProductCategories = () => {
-    dispatch({type: "GET_ALL_PRODUCT_CATEGORIES"});
+    dispatch({ type: "GET_ALL_PRODUCT_CATEGORIES" });
     try {
-        productServices.getCategories()
-         .then(function(response){ 
-            state.categories = response.data;
-            dispatch({ type: "SET_ALL_PRODUCT_CATEGORIES",payload: response.data});
-          })
+      productServices.getCategories()
+        .then(function (response) {
+          let categories = response.data;
+          dispatch({ type: "SET_ALL_PRODUCT_CATEGORIES", payload: categories });
+        })
     } catch (error) {
       dispatch({ type: "SET_PRODUCTS_CATEGORIES_ERROR" });
     }
   };
-
-  useEffect(() => {
-    getProductCategories();
-  }, []);
 
 
   return (
@@ -73,8 +110,10 @@ export const FilterProductsProvider = ({ children }: props) => {
         filterState: state,
         categories: state.categories,
         getProductCategories,
-        filterPorductsByPrice,
-        filterProductsByCategory
+        filterProducts,
+        sortingProduct,
+        searchProduct,
+        clearSearch
       }}
     >
       {children}

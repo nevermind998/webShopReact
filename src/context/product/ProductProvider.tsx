@@ -6,6 +6,7 @@ import { ProductContext } from "./ProductContext";
 
 export interface ProductState {
   products: IProduct[];
+  allProducts: IProduct[];
   product: any;
 }
 
@@ -18,6 +19,7 @@ export type ProductContextProps = {
 
 const INITIAL_STATE = {
   products: [],
+  allProducts: [],
   product: null
 };
 
@@ -39,7 +41,15 @@ export const ProductsProvider = ({ children }: props) => {
     try {
         productServices.getAll()
          .then(function(response){ 
-            dispatch({ type: "SET_PRODUCTS_DATA",payload: response.data});
+            let products = response.data;
+
+            products.map((product : IProduct) => {
+              product.visible = true;
+            });
+            
+            state.allProducts = products;
+            dispatch({ type: "SET_PRODUCTS_DATA",payload: products});
+            dispatch({ type: "SET_ALL_PRODUCTS_DATA",payload: products});
           })
     } catch (error) {
       dispatch({ type: "SET_PRODUCTS_DATA_ERROR" });
@@ -58,7 +68,6 @@ export const ProductsProvider = ({ children }: props) => {
       dispatch({ type: "SET_PRODUCT_DATA_ERROR" });
     }
   }
-
 
   return (
     <ProductContext.Provider

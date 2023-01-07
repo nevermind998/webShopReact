@@ -2,10 +2,11 @@ import { FilterState } from "./FilterProvider";
 import { IProduct } from "interfaces";
 
 type ProductAction =
-  | { type: "GET_PRODUCTS_BY_PRICE"; payload: IProduct[] }
-  | { type: "GET_PRODUCTS_BY_CATEGORY"; payload: IProduct[] }
+  | { type: "GET_PRODUCTS_BY_PRICE"; }
+  | { type: "GET_PRODUCTS_BY_CATEGORY"; }
   | { type: "GET_ALL_PRODUCT_CATEGORIES"; }
   | { type: "SET_PRODUCTS_CATEGORIES_ERROR"; }
+  | { type: "GET_PRODUCTS_BY_FILTER"; }
   | { type: "SET_ALL_PRODUCT_CATEGORIES"; payload: string[] }
 
 export const filterReducer = (
@@ -40,7 +41,10 @@ export const filterReducer = (
         ...state
       };
 
-
+    case "GET_PRODUCTS_BY_FILTER":
+      return {
+        ...state
+      };
 
     default:
       return state;
