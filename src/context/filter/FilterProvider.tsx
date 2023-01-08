@@ -76,7 +76,9 @@ export const FilterProductsProvider = ({ children }: props) => {
       a.title > b.title ? -1 : 1
     );
 
-    setProducts(visibleProducts);
+    let notVisibleProducts = productsState.allProducts.filter(product => !visibleProducts.includes(product)); 
+    notVisibleProducts.map(product => product.visible = false);
+    setProducts([...visibleProducts,...notVisibleProducts]);
   }
 
   const searchProduct = (searchBy: string) => {

@@ -70,7 +70,7 @@
     -  Title, price, quantity and subtotal, remove button +
     - Checkout button which will redirect on checkout page +
 5) Checkout page:
-    with checkout form and order review
+    with checkout form and order review+
 
 ***Bonus challenge***
 

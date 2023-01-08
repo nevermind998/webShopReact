@@ -29,8 +29,6 @@ const CheckoutForm = () => {
       }
     
       const handleSubmit = (event: any) => {
-        event.preventDefault();
-        // send formData to backend or do something else with it
       }
     
       return (
@@ -129,7 +127,7 @@ const CheckoutForm = () => {
           </TextField>
           <br />
           <br />
-          <Button variant="contained">Submit</Button>
+          <Button variant="contained">Place your order</Button>
         </form>
         </div>
         </Box>

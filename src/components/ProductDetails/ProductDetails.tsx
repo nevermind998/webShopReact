@@ -99,9 +99,9 @@ const ProductDetails = (data: any) => {
             <Button onClick={handleClickSubtraction}>-</Button>{total}<Button onClick={handleClickAddition}>+</Button>
             <Button variant="outlined" onClick={addItemToCart}> Add to cart </Button>
             <IconButton color="primary" onClick={addToWishlistFunction}>
-              <Button variant="outlined" >
+         
                 <FavoriteBorderIcon />
-              </Button>
+            
             </IconButton>
 
             <p className={styles.category}>Category: {product.category} </p>
