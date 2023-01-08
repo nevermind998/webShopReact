@@ -1,17 +1,24 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { ProductContext } from "context/product/ProductContext";
 import ProductCard from "components/ProductCard/ProductCard";
-import product from "pages/product";
+import LoaderProducts from "components/LoaderProducts";
 
 const ProductOverview = () => {
 
   const { productsState, getAll } = useContext(ProductContext)
   const { products } = productsState;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAll();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false),900);
+  }, []);
+
+  if (isLoading) return <div><LoaderProducts /></div>
 
   return (
     <ul className={styles.imageGallery}>

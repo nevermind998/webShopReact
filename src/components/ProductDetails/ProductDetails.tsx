@@ -7,6 +7,7 @@ import { WishlistContext } from 'context/wishlist/WishlistContext';
 import { CartContext } from 'context/cart/CartContext';
 import { CounterContext } from 'context/counter/CounterContext';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Loader from 'components/Loader';
 
 export class CartItem implements ICartItem {
   id: number;
@@ -83,7 +84,7 @@ const ProductDetails = (data: any) => {
       updateQuantity(cartItem.id, "plus");
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div><Loader/></div>
   return (
     <div>
       {product ?
