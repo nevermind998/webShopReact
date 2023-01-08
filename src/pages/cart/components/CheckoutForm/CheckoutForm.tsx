@@ -150,7 +150,7 @@ const CheckoutForm = () => {
               );
             })}
 
-            <p>TOTAL: ${cartState.amount+2}</p>
+            <p>TOTAL: <span style={{float:'right'}}>${Math.fround((cartState.amount+2.50)*100)/100}</span></p>
         </div>
         </div>
         </div>

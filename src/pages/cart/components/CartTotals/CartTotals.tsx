@@ -23,7 +23,7 @@ const CartTotals = () => {
             </tr>
             <tr>
               <td className={styles.title_head}>Flat rate:</td>
-              <td className={styles.table_value}>$2.00</td>
+              <td className={styles.table_value}>$2.50</td>
             </tr>
           </tbody>
         </table>
@@ -32,7 +32,7 @@ const CartTotals = () => {
         <tfoot>
           <tr>
             <th className={styles.title_head}>TOTAL</th>
-            <th>${cartState.amount+2}</th>
+            <th>${Math.fround((cartState.amount+2.50)*100)/100}</th>
           </tr>
         </tfoot>
       </table>
