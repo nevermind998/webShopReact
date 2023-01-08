@@ -12,7 +12,8 @@ const QuantityButton:FC<IProps> = ({id, quantity = 1, cb}) => {
 
   const {  updateQuantity } = useContext(CartContext);
   const onClickHandler =(operation: 'plus' | 'minus') => {
-    updateQuantity(id, operation)
+    updateQuantity(id, operation);
+    quantity++;
     cb && cb(operation)
   }
   return (

@@ -67,8 +67,8 @@
    * each section should be component which will be included
 4) Cart page:
    table with chosen products:
-    -  Title, price, quantity and subtotal, remove button
-    - Checkout button which will redirect on checkout page
+    -  Title, price, quantity and subtotal, remove button +
+    - Checkout button which will redirect on checkout page +
 5) Checkout page:
     with checkout form and order review
 

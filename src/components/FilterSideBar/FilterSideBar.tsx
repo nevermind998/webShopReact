@@ -4,7 +4,6 @@ import styles from "./styles.module.css";
 import Slider from '@mui/material/Slider';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { ProductContext } from "context/product/ProductContext";
-import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 
@@ -108,7 +107,8 @@ const FilterSideBar = () => {
 
   function clearFilter(){
     let products = productsState.allProducts;
-    products.map(product => product.visible = true)
+    products.map(product => product.visible = true);
+    setFilters();
     setProducts(products);
   }
 
@@ -124,7 +124,6 @@ const FilterSideBar = () => {
 
   const handleOnSelect = (item: any) => {
     searchProduct(item.name);
-    console.log(item)
   }
 
   const formatResult = (item: any) => {

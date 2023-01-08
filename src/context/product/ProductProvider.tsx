@@ -59,7 +59,6 @@ export const ProductsProvider = ({ children }: props) => {
   const getProductById = (id : any) => {
     dispatch({type: "GET_PRODUCT_BY_ID"});
     try {
-      console.log("Javljam se iz odavde")
         productServices.getById(id)
          .then(function(response){ 
             dispatch({ type: "SET_PRODUCT",payload: response.data});

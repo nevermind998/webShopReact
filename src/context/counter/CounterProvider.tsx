@@ -14,7 +14,7 @@ export type CounterContextProps = {
 };
 
 const INITIAL_STATE: CounterState = {
-  total: 0,
+  total: 1,
  
 };
 interface props {

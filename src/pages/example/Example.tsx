@@ -12,7 +12,6 @@ const ExamplePage = () => {
   
   return (
     <AppLayout>
-      <Headline title="Example" />
       <section className={styles.section}>
         <h2>Context example:</h2>
         <p>Total: {total}</p>

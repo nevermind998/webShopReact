@@ -37,7 +37,7 @@ export const CartProvider = ({ children }: props) => {
 
     dispatch({
       type: "addToCart",
-      payload: { ...item, quantity: 1 },
+      payload: { ...item, quantity: item.quantity },
     });
     updateAmount();
   };

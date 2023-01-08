@@ -2,25 +2,21 @@ import { useContext } from "react";
 import { AppLayout } from "components/Layouts";
 import Headline from "components/Headline";
 import styles from "./styles.module.css";
-import fakedata from "fakedata";
 import { CartContext } from "context/cart/CartContext";
 import CartItem from "./components/CartItem";
 import CartTotals from "./components/CartTotals";
 import Button from "components/Button";
+import { Link } from "react-router-dom";
 
 const CartView = () => {
   const { cartState, removeCartItem } = useContext(CartContext);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { items } = cartState;
-  
   return (
     <AppLayout>
-      <Headline title="Cart" />
       <div className={styles.cartPage}>
         <div className={styles.cartItems}>
-          {fakedata
-            .map((item) => ({ ...item, quantity: 1 }))
+          {cartState.items
+            .map((item) => ({ ...item, quantity:item.quantity}))
             .map((item) => {
               return (
                 <CartItem
@@ -33,7 +29,9 @@ const CartView = () => {
         </div>
         <div className={styles.cartTotalWrapp}>
           <CartTotals />
+          <Link to={`./CheckoutForm`} className={styles.product_overview} >
           <Button className={styles.proceedBtn}>Proceed to Checkout</Button>
+          </Link>  
         </div>
       </div>
     </AppLayout>

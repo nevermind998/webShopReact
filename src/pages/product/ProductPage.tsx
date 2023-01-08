@@ -8,7 +8,6 @@ const ProductPage = () => {
 
   return (
     <AppLayout>
-      <Headline title='Product details' />
         <div>
             { id ? 
         <ProductDetails id={id}/> : <p/> }

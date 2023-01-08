@@ -7,7 +7,6 @@ import styles from "./styles.module.css";
 const Home = () => {
   return (
     <AppLayout>
-      <Headline title='Shop' />
       <div className={styles.main}>
         <div className={styles.column}>
         <FilterSideBar/>
